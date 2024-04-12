@@ -17,17 +17,15 @@ public class AdactinHotelTests extends Base {
         try {
             actions.enterValue(loginPage.usernameField, "BrandonChawane");
             actions.enterValue(loginPage.passwordField, "Brandon87");
-            takeSnapShot(driver,"login");
             actions.click(loginPage.loginBtn);
             Assert.assertTrue(loginPage.usernameShow.isDisplayed());
             if (!loginPage.usernameShow.isDisplayed()) {
-                System.out.println("Login unsuccessful");
                 takeSnapShot(driver, "Login_failed");
             }
 
 
         } catch (Exception e) {
-            System.out.println("test failed: " + e.getMessage());
+            System.out.println("login test failed: " + e.getMessage());
         }
 
     }
@@ -44,7 +42,6 @@ public class AdactinHotelTests extends Base {
             actions.enterValue(homePage.check_out_date,"28/02/2024");
             actions.select(homePage.adult_rooms,"1 - One");
             actions.select(homePage.child_room,"1 - One");
-            takeSnapShot(driver,"search_hotel");
             actions.click(homePage.submitBtn);
             Assert.assertTrue(homePage.hotelBanner.isDisplayed());
             if(!homePage.hotelBanner.isDisplayed()){
@@ -62,9 +59,12 @@ public class AdactinHotelTests extends Base {
     public void selectHotelTest() {
         try {
             actions.click(hotelPage.hotelRadioBtn);
-            takeSnapShot(driver, "select_hotel");
             actions.click(hotelPage.continueBtn);
             Assert.assertTrue(hotelPage.bookHotel.isDisplayed());
+            if(!hotelPage.bookHotel.isDisplayed()){
+                takeSnapShot(driver, "select_hotel_failed");
+            }
+
 
         } catch (Exception e) {
             System.out.println("Select Hotel test failed: " + e.getMessage());
@@ -82,9 +82,11 @@ public class AdactinHotelTests extends Base {
             actions.select(bookHotelPage.expiryMonth,"October");
             actions.select(bookHotelPage.expiryYear,"2025");
             actions.enterValue(bookHotelPage.ccvNumber,"321");
-            takeSnapShot(driver,"book_hotel");
             actions.click(bookHotelPage.bookNowBtn);
             Assert.assertTrue(bookHotelPage.bookingConfirmation.isDisplayed());
+            if(!bookHotelPage.bookingConfirmation.isDisplayed()){
+                takeSnapShot(driver,"book_hotel_failed");
+            }
 
         } catch (Exception e) {
             System.out.println("Book Hotel test failed: " + e.getMessage());
@@ -94,7 +96,7 @@ public class AdactinHotelTests extends Base {
     @Test(dependsOnMethods = "bookHotelTest")
     public void logOut() {
         try {
-            actions.click(bookHotelPage.logOut);;
+            actions.click(bookHotelPage.logOut);
         } catch (Exception e) {
             System.out.println("Logout failed");
         }
