@@ -9,6 +9,7 @@ This file is going to take us step by step on how to set up the project and exec
 * web driver Manager
 * extent extentReports
 * Maven
+* Maven Sure fire plugin
 
 ## Project Structure
 This is the page object model framework, where all the tests are separated in their own pages
