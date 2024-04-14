@@ -13,7 +13,6 @@ public class AdactinHotelTests extends Base {
 
     @Test
     public void loginTest() {
-
         try {
             actions.enterValue(loginPage.usernameField, "BrandonChawane");
             actions.enterValue(loginPage.passwordField, "Brandon87");
@@ -23,7 +22,6 @@ public class AdactinHotelTests extends Base {
                 takeSnapShot(driver, "Login_failed");
             }
 
-
         } catch (Exception e) {
             System.out.println("login test failed: " + e.getMessage());
         }
@@ -32,7 +30,6 @@ public class AdactinHotelTests extends Base {
 
     @Test(dependsOnMethods = "loginTest")
     public void searchHotelTest() {
-
         try {
             actions.select(homePage.location, "Sydney");
             actions.select(homePage.hotels,"Hotel Creek");
@@ -48,8 +45,6 @@ public class AdactinHotelTests extends Base {
                 System.out.println("search Hotel test failed");
                 takeSnapShot(driver,"search_failed");
             }
-
-
         } catch (Exception e) {
             System.out.println("search Hotel test failed: " + e.getMessage());
         }
@@ -64,8 +59,6 @@ public class AdactinHotelTests extends Base {
             if(!hotelPage.bookHotel.isDisplayed()){
                 takeSnapShot(driver, "select_hotel_failed");
             }
-
-
         } catch (Exception e) {
             System.out.println("Select Hotel test failed: " + e.getMessage());
         }
@@ -100,7 +93,6 @@ public class AdactinHotelTests extends Base {
         } catch (Exception e) {
             System.out.println("Logout failed");
         }
-
     }
 
     @AfterClass
@@ -111,7 +103,5 @@ public class AdactinHotelTests extends Base {
         } catch (Exception e) {
             System.out.println("tear down failed: " + e.getMessage());
         }
-
     }
-
 }
