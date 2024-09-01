@@ -32,6 +32,7 @@ public class Listener implements ITestListener {
     public void onTestFailure(ITestResult result) {
 
         extentTest.log(Status.FAIL, "Test case " + result.getMethod().getMethodName() + "has failed");
+        
     }
 
     @Override

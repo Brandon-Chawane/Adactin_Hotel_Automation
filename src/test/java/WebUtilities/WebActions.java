@@ -6,11 +6,12 @@ import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 
+import static Tests.BaseClass.driver;
+
 
 public class WebActions {
 
-
-    private final WebDriver driver;
+    WebDriver driver;
 
     public WebActions(WebDriver driver) {
         this.driver = driver;

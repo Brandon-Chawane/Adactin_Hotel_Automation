@@ -1,107 +1,111 @@
 package Tests;
 
 
+import PageObjects.*;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import static Report.ExtentReportManager.takeSnapShot;
 
 
-public class AdactinHotelTests extends Base {
+public class AdactinHotelTests extends BaseClass {
 
 
     @Test
     public void loginTest() {
+        logger.info("***Tests started***");
+        LoginPage lp = new LoginPage(driver);
         try {
-            actions.enterValue(loginPage.usernameField, "BrandonChawane");
-            actions.enterValue(loginPage.passwordField, "Brandon87");
-            actions.click(loginPage.loginBtn);
-            Assert.assertTrue(loginPage.usernameShow.isDisplayed());
-            if (!loginPage.usernameShow.isDisplayed()) {
-                takeSnapShot(driver, "Login_failed");
-            }
-
+            lp.setUsername(p.getProperty("username"));
+            lp.setPassword(p.getProperty("password"));
+            lp.clickLoginButton();
+            boolean loggedInSuccess = lp.validateLogin();
+            Assert.assertTrue(loggedInSuccess);
         } catch (Exception e) {
-            System.out.println("login test failed: " + e.getMessage());
+            Assert.fail();
+            logger.error("*loginTest failed*");
+            takeSnapShot(driver, "loginTest failed");
         }
 
     }
 
     @Test(dependsOnMethods = "loginTest")
     public void searchHotelTest() {
+        SearchHotelPage hp = new SearchHotelPage(driver);
         try {
-            actions.select(homePage.location, "Sydney");
-            actions.select(homePage.hotels,"Hotel Creek");
-            actions.select(homePage.room_type,"Standard");
-            actions.select(homePage.number_of_rooms,"2 - Two");
-            actions.enterValue(homePage.check_in_date,"27/02/2024");
-            actions.enterValue(homePage.check_out_date,"28/02/2024");
-            actions.select(homePage.adult_rooms,"1 - One");
-            actions.select(homePage.child_room,"1 - One");
-            actions.click(homePage.submitBtn);
-            Assert.assertTrue(homePage.hotelBanner.isDisplayed());
-            if(!homePage.hotelBanner.isDisplayed()){
-                System.out.println("search Hotel test failed");
-                takeSnapShot(driver,"search_failed");
-            }
+            hp.setLocation(p.getProperty("location"));
+            hp.setHotel(p.getProperty("hotels"));
+            hp.setRoomType(p.getProperty("room_type"));
+            hp.setNumberOfRooms(p.getProperty("number_of_rooms"));
+            hp.setCheckInDate(p.getProperty("check_in_date"));
+            hp.setCheckOutDate(p.getProperty("check_out_date"));
+            hp.setAdultPerRoom(p.getProperty("adult_rooms"));
+            hp.setChildrenPerRoom(p.getProperty("child_room"));
+            hp.clickSubmitButton();
+            boolean validateSearchPage = hp.validateSearchHotel();
+            Assert.assertTrue(validateSearchPage);
         } catch (Exception e) {
-            System.out.println("search Hotel test failed: " + e.getMessage());
+            Assert.fail();
+            logger.error("*searchHotelTest failed*");
+            takeSnapShot(driver, "searchHotelTest failed");
         }
     }
 
     @Test(dependsOnMethods = "searchHotelTest")
-    public void selectHotelTest() {
+    public void selectAHotelTest() {
+        SelectAHotelPage shp = new SelectAHotelPage(driver);
         try {
-            actions.click(hotelPage.hotelRadioBtn);
-            actions.click(hotelPage.continueBtn);
-            Assert.assertTrue(hotelPage.bookHotel.isDisplayed());
-            if(!hotelPage.bookHotel.isDisplayed()){
-                takeSnapShot(driver, "select_hotel_failed");
-            }
+            boolean hotelSelectedValidation = shp.selectHotelValidation();
+            Assert.assertTrue(hotelSelectedValidation);
+            shp.clickRadioButton();
+            shp.clickContinueButton();
         } catch (Exception e) {
-            System.out.println("Select Hotel test failed: " + e.getMessage());
+            Assert.fail();
+            logger.error("Select Hotel Test Failed");
+            takeSnapShot(driver, ("*selectHotelTest failed*"));
         }
     }
 
-    @Test(dependsOnMethods = "selectHotelTest")
-    public void bookHotelTest() {
+    @Test(dependsOnMethods = "selectAHotelTest")
+    public void bookAHotelTest() {
+        BookAHotelPage bh = new BookAHotelPage(driver);
         try {
-            actions.enterValue(bookHotelPage.first_name,"Brandon");
-            actions.enterValue(bookHotelPage.last_name,"Chawane");
-            actions.enterValue(bookHotelPage.billing_address,"17 Azania Ave, Maven Hill, Boon Stein, 1990");
-            actions.enterValue(bookHotelPage.creditCardNum,"9829866713463529");
-            actions.select(bookHotelPage.creditCardType,"VISA");
-            actions.select(bookHotelPage.expiryMonth,"October");
-            actions.select(bookHotelPage.expiryYear,"2025");
-            actions.enterValue(bookHotelPage.ccvNumber,"321");
-            actions.click(bookHotelPage.bookNowBtn);
-            Assert.assertTrue(bookHotelPage.bookingConfirmation.isDisplayed());
-            if(!bookHotelPage.bookingConfirmation.isDisplayed()){
-                takeSnapShot(driver,"book_hotel_failed");
-            }
+            bh.setFirstName(p.getProperty("first_name"));
+            bh.setLastName(p.getProperty("last_name"));
+            bh.setAddress(p.getProperty("billing_address"));
+            bh.setCcNum(p.getProperty("creditCardNum"));
+            bh.setCreditCardType(p.getProperty("creditCardType"));
+            bh.setExpiryMonth(p.getProperty("expiryMonth"));
+            bh.setExpiryYear(p.getProperty("expiryYear"));
+            bh.setCcVv(p.getProperty("ccvNumber"));
+            boolean validation = bh.validateBookHotel();
+            Assert.assertTrue(validation);
+            bh.clickBookNowButton();
+        } catch (Exception e) {
+            Assert.fail();
+            logger.error("*book hotel test failed*");
+            takeSnapShot(driver, "bookHotelTest failed");
+        }
+
+    }
+
+    @Test(dependsOnMethods = "bookAHotelTest")
+    public void bookingConfirmationTest() {
+        BookingConfirmationPage bcp = new BookingConfirmationPage(driver);
+        try {
+                boolean confirmation = bcp.bookingConfirmed();
+                Assert.assertTrue(confirmation);
+                bcp.clickLogOutButton();
 
         } catch (Exception e) {
-            System.out.println("Book Hotel test failed: " + e.getMessage());
+            Assert.fail();
+            logger.error("*booking confirmation test failed*");
+            takeSnapShot(driver, "bookingConfirmationTest failed");
         }
     }
 
-    @Test(dependsOnMethods = "bookHotelTest")
-    public void logOut() {
-        try {
-            actions.click(bookHotelPage.logOut);
-        } catch (Exception e) {
-            System.out.println("Logout failed");
-        }
-    }
 
-    @AfterClass
-    public void tearDown() {
-        try {
-            driver.close();
-            driver.quit();
-        } catch (Exception e) {
-            System.out.println("tear down failed: " + e.getMessage());
-        }
-    }
 }
+
+
+
