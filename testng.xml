@@ -12,5 +12,12 @@
             <class name="Tests.AdactinHotelTests"/>
         </classes>
     </test>
+    <test name="Edge">
+        <parameter name="browser" value="edge"/>
+        <parameter name="os" value="windows"/>
+        <classes>
+            <class name="Tests.AdactinHotelTests"/>
+        </classes>
+    </test>
 
 </suite>
