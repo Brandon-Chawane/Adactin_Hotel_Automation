@@ -102,7 +102,9 @@ public class AdactinHotelTests extends BaseClass {
             logger.error("*booking confirmation test failed*");
             takeSnapShot(driver, "bookingConfirmationTest failed");
         }
+        logger.info("***Tests ended***");
     }
+
 
 
 }

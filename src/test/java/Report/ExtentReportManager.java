@@ -21,7 +21,7 @@ public class ExtentReportManager {
 
 
         sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/reports/report.html");
-        sparkReporter.config().setTheme(Theme.STANDARD);
+        sparkReporter.config().setTheme(Theme.DARK);
         sparkReporter.config().setReportName("Adactin Report");
 
         extent = new ExtentReports();
