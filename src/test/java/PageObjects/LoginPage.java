@@ -24,9 +24,9 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//input[contains(@id,'login')]")
     private WebElement loginBtn;
 
-    @FindBy(xpath = "//img[@src='img/AdactIn_logo.png']")
-    private WebElement usernameShow;
 
+    @FindBy(xpath="//td[@class='login_title']")
+    private WebElement usernameShow;
 
 
     public void setUsername(String username){
