@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 
 public class SelectAHotelPage extends BasePage {
-    WebDriver driver;
+
     WebActions wa = new WebActions(driver);
 
     public SelectAHotelPage(WebDriver driver) {
@@ -16,9 +16,9 @@ public class SelectAHotelPage extends BasePage {
 
     @FindBy(xpath = "//td[@class='login_title'][contains(.,'Select Hotel')]")
     private WebElement bookAHotelValidation;
-    @FindBy(xpath = "//input[contains(@id,'radiobutton_0')]")
+    @FindBy(id= "radiobutton_0")
     private WebElement hotelRadioBtn;
-    @FindBy(xpath = "//input[contains(@id,'continue')]")
+    @FindBy(id = "continue")
     private WebElement continueBtn;
 
     public void clickRadioButton(){

@@ -12,23 +12,23 @@ public class BookAHotelPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//input[@id='first_name']")
+    @FindBy(id="first_name")
     private WebElement txtFirstName;
-    @FindBy(xpath = "//input[@id='last_name']")
+    @FindBy(id="last_name")
     private WebElement txtLastName;
-    @FindBy(xpath = "//textarea[@id='address']")
+    @FindBy(id="address")
     private WebElement txtAddress;
-    @FindBy(xpath = "//input[@id='cc_num']")
+    @FindBy(id="cc_num")
     private WebElement txtCcNum;
-    @FindBy(xpath = "//select[@id='cc_type']")
+    @FindBy(id="cc_type")
     private WebElement SelectCreditCardType;
-    @FindBy(xpath = "//select[@id='cc_exp_month']")
+    @FindBy(id="cc_exp_month")
     private WebElement SelectMonth;
-    @FindBy(xpath = "//select[@id='cc_exp_year']")
+    @FindBy(id="cc_exp_year")
     private WebElement SelectYear;
-    @FindBy(xpath = "//input[@id='cc_cvv']")
+    @FindBy(id="cc_cvv")
     private WebElement txtCcCvv;
-    @FindBy(xpath = "//input[@id='book_now']")
+    @FindBy(id= "book_now")
     private WebElement bookNowButton;
     @FindBy(xpath = "(//td[@colspan='2'][contains(.,'Book A Hotel')])[2]")
     private WebElement bookHotelValidation;

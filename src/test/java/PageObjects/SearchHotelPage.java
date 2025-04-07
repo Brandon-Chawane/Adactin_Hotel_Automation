@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 public class SearchHotelPage extends BasePage {
 
 
-    WebDriver driver;
     WebActions wa = new WebActions(driver);
 
     public SearchHotelPage(WebDriver driver) {
@@ -16,23 +15,23 @@ public class SearchHotelPage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//select[@id='location']")
+    @FindBy( id="location")
     private WebElement txtLocation;
-    @FindBy(xpath = "//select[@id='hotels']")
+    @FindBy(id= "hotels")
     private WebElement txtHotels;
-    @FindBy(xpath = "//select[@id='room_type']")
+    @FindBy(id= "room_type")
     private WebElement SelectRoomType;
-    @FindBy(xpath = "//select[@id='room_nos']")
+    @FindBy(id= "room_nos")
     private WebElement txtSelectNumberOfRooms;
-    @FindBy(xpath = "//input[@id='datepick_in']")
+    @FindBy(id="datepick_in")
     private WebElement datepickIn;
-    @FindBy(xpath = "//input[@id='datepick_out']")
+    @FindBy(id="datepick_out")
     private WebElement datepickOut;
-    @FindBy(xpath = "//select[@id='adult_room']")
+    @FindBy(id="adult_room")
     private WebElement SelectAdultsPerRoom;
-    @FindBy(xpath = "//select[@id='child_room']")
+    @FindBy(id="child_room")
     private WebElement SelectChildrenRoom;
-    @FindBy(xpath = "//input[@id='Submit']")
+    @FindBy(id="Submit")
     private WebElement submit;
     @FindBy(xpath = "//td[@valign='top'][contains(.,'Welcome to Adactin Group of Hotels')]")
     private WebElement hotelValidationBanner;

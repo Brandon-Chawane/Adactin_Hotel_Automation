@@ -15,13 +15,13 @@ public class LoginPage extends BasePage{
         super(driver);
     }
     WebActions wa = new WebActions(driver);
-    @FindBy(xpath = "//input[contains(@id,'username')]")
+    @FindBy(id = "username")
     private WebElement txtUsername;
 
-    @FindBy(xpath = "//input[contains(@id,'password')]")
+    @FindBy(id = "password")
     private WebElement txtPassword;
 
-    @FindBy(xpath = "//input[contains(@id,'login')]")
+    @FindBy(id = "login")
     private WebElement loginBtn;
 
 

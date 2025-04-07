@@ -13,7 +13,7 @@ public class BookingConfirmationPage extends BasePage{
 
     @FindBy(xpath="//td[@class='login_title']")  private WebElement bookingConfirmation;
 
-    @FindBy(xpath="//input[@id='logout']")  private WebElement logout;
+    @FindBy(id="logout")  private WebElement logout;
 
 
 
